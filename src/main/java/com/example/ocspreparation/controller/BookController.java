@@ -1,15 +1,26 @@
 package com.example.ocspreparation.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.ocspreparation.collection.Book;
+import com.example.ocspreparation.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/book")
 public class BookController {
 
+    @Autowired
+    BookService bookService;
     @GetMapping
-    public String test(){
-        return "string";
+    public ResponseEntity<List<Book>> getAllBook(){
+        return bookService.getAllBook();
+    }
+
+    @PostMapping
+    public ResponseEntity<Book> addBook(@RequestBody Book book) {
+        return bookService.saveBook(book);
     }
 }
