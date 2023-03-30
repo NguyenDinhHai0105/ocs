@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ocs-version-yml # tên của deployment
+spec:
+  replicas: 2 #số lượng bản sao
+  selector:
+    matchLabels:
+      app: ocs-version-yml #chọn các pod có label = ocs-version-yml
+  template:
+    metadata:
+      labels:
+        app: ocs-version-yml #label của pods chứa container
+    spec:
+      containers:
+        - name: ocs-app
+          image: docker30041999/ocs-preparation:0.2
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ocs-version-yml
+spec:
+  selector:
+    app: ocs-version-yml #chọn các pod để expose dựa theo label của nó
+  ports:
+    - port: 8080 #port service lắng nghe request
+      targetPort: 8080 #port service chuyển request đến
+  type: LoadBalancer

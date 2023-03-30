@@ -23,4 +23,9 @@ public class BookController {
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
         return bookService.saveBook(book);
     }
+
+    @GetMapping("/test")
+    public String getTestK8s() {
+        return "Hai Nguyen Dinh";
+    }
 }
