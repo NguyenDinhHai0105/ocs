@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config
+data:
+  host: "192.168.49.2"
+  dbName: book
+  user: admin
+  password: "123456"
+  port: "30332"

@@ -1,0 +1,13 @@
+apiVersion: "v1"
+kind: "PersistentVolumeClaim"
+metadata: 
+  name: "mongodb-pvc"
+  labels: 
+    app: "mongo-db"
+spec: 
+  storageClassName: gp2
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi

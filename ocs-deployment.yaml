@@ -14,9 +14,42 @@ spec:
     spec:
       containers:
         - name: ocs-app
-          image: docker30041999/ocs-preparation:0.2
+          image: docker30041999/ocs-preparation:0.4
           ports:
-            - containerPort: 8080
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: debug-port
+              containerPort: 5005
+              protocol: TCP
+          env:
+            - name: DATABASE #setting từ config map
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: dbName
+            - name: HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: host
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: port
+            - name: USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: user
+            - name: PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: password
+            - name: JAVA_TOOL_OPTIONS
+              value: '-Xdebug -agentlib:jdwp=transport=dt_socket,address=0.0.0.0:5005,server=y,suspend=n'
           imagePullPolicy: Always
 ---
 apiVersion: v1
