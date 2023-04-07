@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: ocs-app
-          image: docker30041999/ocs-preparation:0.4
+          image: docker30041999/ocs-preparation:latest
           ports:
             - name: http
               containerPort: 8080
